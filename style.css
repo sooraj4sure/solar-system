@@ -1,4 +1,3 @@
-
         * {
             margin: 0;
             padding: 0;
@@ -32,8 +31,8 @@
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
-            min-width: 150px;
-            max-height: 40vh;
+            min-width: 300px;
+            max-height: 80vh;
             overflow-y: auto;
             z-index: 100;
             transition: all 0.3s ease;
@@ -44,6 +43,149 @@
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
             color: #333;
+        }
+        
+        .hamburger-menu {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 101;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .hamburger-menu {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .hamburger-menu:hover {
+            transform: scale(1.1);
+        }
+        
+        .hamburger-icon {
+            width: 20px;
+            height: 16px;
+            position: relative;
+        }
+        
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .hamburger-icon span {
+            background: #333;
+        }
+        
+        .hamburger-icon span:nth-child(1) { top: 0; }
+        .hamburger-icon span:nth-child(2) { top: 7px; }
+        .hamburger-icon span:nth-child(3) { top: 14px; }
+        
+        .hamburger-menu.active .hamburger-icon span:nth-child(1) {
+            top: 7px;
+            transform: rotate(45deg);
+        }
+        
+        .hamburger-menu.active .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active .hamburger-icon span:nth-child(3) {
+            top: 7px;
+            transform: rotate(-45deg);
+        }
+        
+        .collapsible-section {
+            margin-bottom: 10px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        body.light-theme .section-header {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-header:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        body.light-theme .section-header:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-toggle {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+        
+        .section-content {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .section-content.collapsed {
+            max-height: 0;
+        }
+        
+        .info-toggle {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 101;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+        }
+        
+        body.light-theme .info-toggle {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        
+        .info-toggle:hover {
+            transform: scale(1.1);
         }
         
         .panel-header {
@@ -205,17 +347,96 @@
                 left: 10px;
                 top: 10px;
                 padding: 15px;
+                transform: translateX(-100%);
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            #control-panel.active {
+                transform: translateX(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+                top: 10px;
+                left: 10px;
+            }
+            
+            .info-toggle {
+                display: flex;
+                bottom: 10px;
+                right: 10px;
             }
             
             #info-panel {
                 left: 10px;
                 bottom: 10px;
                 max-width: 250px;
+                transform: translateY(100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+            
+            #info-panel.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
             }
             
             .control-button {
                 padding: 8px 16px;
                 font-size: 12px;
+                margin: 3px;
+            }
+            
+            .panel-header {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .section-header {
+                font-size: 14px;
+                padding: 8px;
+            }
+            
+            .planet-label {
+                font-size: 13px;
+            }
+            
+            .speed-value {
+                font-size: 11px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #control-panel {
+                min-width: calc(100vw - 40px);
+                max-width: calc(100vw - 40px);
+                max-height: 60vh;
+                padding: 12px;
+            }
+            
+            #info-panel {
+                max-width: calc(100vw - 40px);
+                font-size: 11px;
+            }
+            
+            .control-button {
+                padding: 6px 12px;
+                font-size: 11px;
+                margin: 2px;
+            }
+            
+            .panel-header {
+                font-size: 14px;
+            }
+            
+            .hamburger-menu, .info-toggle {
+                width: 45px;
+                height: 45px;
             }
         }
         
@@ -246,43 +467,3 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-
-
-        /* Hamburger Button (desktop hidden, mobile visible) */
-.hamburger {
-    display: none;
-    background: linear-gradient(45deg, #333, #555);
-    color: white;
-    padding: 10px 15px;
-    font-size: 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px auto;
-    width: fit-content;
-}
-
-/* Light theme override */
-body.light-theme .hamburger {
-    background: linear-gradient(45deg, #ccc, #eee);
-    color: #333;
-}
-
-/* Mobile layout adjustments */
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
-
-    .main-controls {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .main-controls.show {
-        display: flex;
-    }
-}

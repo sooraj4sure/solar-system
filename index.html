@@ -1,84 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Solar System Simulation</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Hamburger Button */
-        .hamburger {
-            display: none;
-            background: #333;
-            color: white;
-            padding: 10px 15px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px auto;
-            text-align: center;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            .main-controls {
-                display: none;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .main-controls.show {
-                display: flex;
-            }
-        }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="loading-screen" id="loading-screen">
-        <div class="loading-text">Loading Solar System...</div>
+      <div class="loading-text">Loading Solar System...</div>
     </div>
-    
+
     <div id="canvas-container">
-        <canvas id="three-canvas"></canvas>
-       
-        <div id="control-panel">
-            <div class="panel-header">Solar System Controls</div>
+      <canvas id="three-canvas"></canvas>
 
-            <!-- Hamburger for mobile -->
-            <button class="hamburger" onclick="toggleControls()">🕸️</button>
-            
-            <div class="main-controls" id="mainControls">
-                <button class="control-button pause-button" id="pause-btn">Pause</button>
-                <button class="control-button reset-button" id="reset-btn">Reset</button>
-                <button class="control-button theme-toggle" id="theme-btn">Light Mode</button>
+      <!-- Hamburger Menu for Mobile -->
+      <div class="hamburger-menu" id="hamburger-menu">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="control-panel">
+        <div class="panel-header">Solar System Controls</div>
+
+        <!-- Main Controls Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="main-controls">
+            <span>System Controls</span>
+            <span class="section-toggle">▼</span>
+          </div>
+          <div class="section-content" id="main-controls-content">
+            <div class="main-controls">
+              <button class="control-button pause-button" id="pause-btn">
+                Pause
+              </button>
+              <button class="control-button reset-button" id="reset-btn">
+                Reset
+              </button>
+              <button class="control-button theme-toggle" id="theme-btn">
+                Light Mode
+              </button>
             </div>
-            
-            <div id="planet-controls"></div>
+          </div>
         </div>
-        
-        <div id="info-panel">
-            <strong>Controls:</strong><br>
-            • Mouse: Rotate camera<br>
-            • Scroll: Zoom in/out<br>
-            • Hover: Planet info<br>
-            • Sliders: Adjust orbit speed
-        </div>
-        
-        <div class="planet-tooltip" id="tooltip"></div>
-    </div>
 
-    <script>
-        function toggleControls() {
-            const controls = document.getElementById("mainControls");
-            controls.classList.toggle("show");
-        }
-    </script>
-</body>
+        <!-- Planet Controls Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="planet-controls">
+            <span>Planet Speeds</span>
+            <span class="section-toggle">▼</span>
+          </div>
+          <div class="section-content" id="planet-controls-content">
+            <div id="planet-controls"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Toggle for Mobile -->
+      <div class="info-toggle" id="info-toggle">ℹ️</div>
+
+      <div id="info-panel">
+        <strong>Controls:</strong><br />
+        • Mouse: Rotate camera<br />
+        • Scroll: Zoom in/out<br />
+        • Hover: Planet info<br />
+        • Sliders: Adjust orbit speed
+      </div>
+
+      <div class="planet-tooltip" id="tooltip"></div>
+    </div>
+  </body>
 </html>
